@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  mssql-server:
+      image: 'mcr.microsoft.com/mssql/server'
+      container_name: 'my-mssql-container'
+      environment:
+        SA_PASSWORD: "1234Eg4321"
+        ACCEPT_EULA: "Y"
+      volumes:
+        - ./data:/var/opt/mssql/data
+  app:
+    build: ./demo/
+    container_name: 'java-app'
+    ports:
+    - 8081:8081
+  front:
+      build: ./front/
+      container_name: 'react-app'
+      ports:
+        - 3000:3000
